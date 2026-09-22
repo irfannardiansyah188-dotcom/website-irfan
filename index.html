@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
@@ -22,6 +22,33 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Gaya Khusus Puzzle */
+        #puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 2px;
+            width: 304px;
+            height: 304px;
+            margin: 20px auto;
+            border: 4px solid #f39c12;
+            background: #333;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            background-image: url('irfan-puzzle.jpg');
+            background-size: 300px 300px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.1s;
+        }
+        .puzzle-piece:active {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300">
 
@@ -35,7 +62,8 @@
             <nav class="flex items-center gap-6 text-sm font-medium">
                 <a href="#profil" class="hover:text-accentGreen transition hidden sm:inline">Profil</a>
                 <a href="#quests" class="hover:text-accentGreen transition hidden sm:inline">Quest</a>
-              <a href="puzzle.html" class="hover:text-accentGreen transition hidden sm:inline text-accentGreen font-bold">Mini Game</a>  <!-- Tombol Toggle Tema -->
+                <a href="#puzzle-section" class="hover:text-accentGreen transition hidden sm:inline text-accentGreen font-bold">Mini Game</a>
+                <!-- Tombol Toggle Tema -->
                 <button onclick="toggleTheme()" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-yellow-400 p-2 rounded-xl transition shadow hover:scale-105" title="Ganti Tema">
                     <i id="themeIcon" class="fa-solid fa-moon"></i>
                 </button>
@@ -157,7 +185,7 @@
             </div>
         </section>
 
-        <!-- FITUR MINI GAME BARU: Tebak Level Monster -->
+        <!-- FITUR MINI GAME 1: Tebak Level Monster -->
         <section id="minigame" class="space-y-6">
             <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
                 <i class="fa-solid fa-gamepad text-accentGreen"></i> Mini Game: Tebak Level Monster (Boss Raid)
@@ -185,6 +213,30 @@
                 <button onclick="resetGame()" id="resetBtn" class="hidden text-xs text-accentBlue hover:underline font-semibold">
                     <i class="fa-solid fa-rotate-right mr-1"></i> Mainkan Ulang Lawan Monster Baru
                 </button>
+            </div>
+        </section>
+
+        <!-- FITUR MINI GAME 2: RPG Photo Puzzle (TERINTEGRASI DI HALAMAN UTAMA) -->
+        <section id="puzzle-section" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-puzzle-piece text-accentGreen"></i> Mini Game: RPG Photo Puzzle
+            </h2>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-xl mx-auto">
+                <div class="space-y-2">
+                    <span class="bg-amber-500/10 text-amber-500 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/20">Quest Spesial</span>
+                    <h3 class="text-2xl font-extrabold">Susun Puzzle Foto Irfan!</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">
+                        Susun kembali potongan foto Irfan dengan mengklik kotaknya secara berurutan!
+                    </p>
+                </div>
+
+                <div id="puzzle-container"></div>
+                
+                <div class="flex justify-center">
+                    <button onclick="acakPuzzle()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
+                        <i class="fa-solid fa-shuffle mr-1"></i> Acak Puzzle
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -318,6 +370,66 @@
             status.className = "p-4 rounded-xl bg-slate-100 dark:bg-darkBg text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700";
         }
 
+        // Logika Mini Game 2: RPG Photo Puzzle
+        const puzzleContainer = document.getElementById('puzzle-container');
+        const ukuranGrid = 3;
+        let posisiAwal = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        let posisiSekarang = [...posisiAwal];
+
+        function buatPuzzle() {
+            puzzleContainer.innerHTML = '';
+            posisiSekarang.forEach((indexAsli, indexSekarang) => {
+                const piece = document.createElement('div');
+                piece.classList.add('puzzle-piece');
+                
+                const x = (indexAsli % ukuranGrid) * 100;
+                const y = Math.floor(indexAsli / ukuranGrid) * 100;
+                piece.style.backgroundPosition = `-${x}px -${y}px`;
+                
+                piece.addEventListener('click', () => {
+                    tukarPosisi(indexSekarang);
+                });
+
+                puzzleContainer.appendChild(piece);
+            });
+        }
+
+        let indeksTerpilih = null;
+        function tukarPosisi(index) {
+            if (indeksTerpilih === null) {
+                indeksTerpilih = index;
+                puzzleContainer.children[index].style.border = '2px solid #00ffcc';
+            } else {
+                let temp = posisiSekarang[indeksTerpilih];
+                posisiSekarang[indeksTerpilih] = posisiSekarang[index];
+                posisiSekarang[index] = temp;
+                
+                indeksTerpilih = null;
+                buatPuzzle();
+                cekMenangPuzzle();
+            }
+        }
+
+        function acakPuzzle() {
+            for (let i = posisiSekarang.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [posisiSekarang[i], posisiSekarang[j]] = [posisiSekarang[j], posisiSekarang[i]];
+            }
+            buatPuzzle();
+        }
+
+        function cekMenangPuzzle() {
+            const menang = posisiSekarang.every((val, i) => val === posisiAwal[i]);
+            if (menang) {
+                setTimeout(() => {
+                    alert("🎉 Selamat! Kamu berhasil menyelesaikan Puzzle RPG Irfan!");
+                }, 200);
+            }
+        }
+
+        // Jalankan puzzle saat halaman dimuat
+        acakPuzzle();
+
         // Logika Quest Log (To-Do List)
         function addTodo() {
             const input = document.getElementById('todoInput');
@@ -357,8 +469,6 @@
             document.getElementById('senderEmail').value = '';
             document.getElementById('senderMessage').value = '';
         }
-<div style="text-align: center; margin: 40px 0;">
-        <a href="puzzle.html" style="background-color: #f39c12; color: #fff; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 8px; box-shadow: 0 4px #d35400; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">🎮 Mainkan RPG Photo Puzzle</a>
-    </div>
+    </script>
 </body>
 </html>
