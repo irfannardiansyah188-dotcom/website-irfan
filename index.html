@@ -72,6 +72,46 @@
             50% { transform: translateY(-45px) translateX(18px); opacity: 0.9; }
             100% { transform: translateY(-90px) translateX(-10px); opacity: 0; }
         }
+
+        /* Animasi Pedang Menusuk ke Logo */
+        @keyframes swordStrike {
+            0% {
+                opacity: 0;
+                transform: translate(34px, -34px) rotate(45deg) scale(1.15);
+            }
+            55% {
+                opacity: 1;
+                transform: translate(4px, -4px) rotate(45deg) scale(1);
+            }
+            72% {
+                transform: translate(-3px, 3px) rotate(45deg) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0px, 0px) rotate(45deg) scale(1);
+            }
+        }
+        @keyframes shieldImpact {
+            0%, 52% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.35));
+            }
+            68% {
+                transform: scale(0.93);
+                filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.85));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.5));
+            }
+        }
+        .animate-sword-strike {
+            animation: swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-shield-impact {
+            animation: shieldImpact 0.95s ease-out forwards;
+        }
+
         .animate-float-slow {
             animation: floatSlow 6s ease-in-out infinite;
         }
@@ -137,8 +177,42 @@
         <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-emerald-400/60 rounded-bl-lg pointer-events-none"></div>
         <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-emerald-400/60 rounded-br-lg pointer-events-none"></div>
 
+        <!-- LOGO KIRI ATAS TAMPILAN DEPAN -->
+        <div class="fixed top-7 left-7 z-20">
+            <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center gap-3 select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+                <div class="rpg-logo-badge relative w-11 h-11 shrink-0 flex items-center justify-center animate-shield-impact">
+                    <svg class="w-11 h-11" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="rpgShieldGradWelcome" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#34d399"/>
+                                <stop offset="55%" stop-color="#10b981"/>
+                                <stop offset="100%" stop-color="#38bdf8"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M32 5L53 13.5V29.5C53 43.2 44.1 54.4 32 59C19.9 54.4 11 43.2 11 29.5V13.5L32 5Z" fill="#071224" stroke="url(#rpgShieldGradWelcome)" stroke-width="3"/>
+                        <path d="M32 11L47 17.2V29.1C47 39.8 40.3 48.6 32 52.5C23.7 48.6 17 39.8 17 29.1V17.2L32 11Z" stroke="url(#rpgShieldGradWelcome)" stroke-opacity="0.35" stroke-width="1.5"/>
+                        <text x="32" y="38" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="800" font-family="sans-serif">I</text>
+                    </svg>
+                    <svg class="rpg-sword absolute inset-0 w-11 h-11 animate-sword-strike pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M46 14L23 37L27 41L50 18L52 12L46 14Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.2"/>
+                        <path d="M19 33L31 45" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round"/>
+                        <path d="M23 39L16 46" stroke="#10b981" stroke-width="3.4" stroke-linecap="round"/>
+                        <circle cx="31" cy="33" r="2.2" fill="#38bdf8"/>
+                    </svg>
+                </div>
+                <div class="leading-tight text-left">
+                    <div class="text-base sm:text-lg font-extrabold tracking-wide text-white">
+                        IRFAN<span class="text-emerald-400">.DEV</span>
+                    </div>
+                    <div class="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-300/85">
+                        RPG Realm
+                    </div>
+                </div>
+            </button>
+        </div>
+
         <!-- Wadah Utama: Foto Profil di Kiri + Ucapan di Tengah + Foto Puzzle di Kanan -->
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 pb-8 lg:pt-8 flex flex-col lg:flex-row items-center justify-between gap-8">
             
             <!-- KIRI: FOTO PROFIL -->
             <div class="relative flex flex-col items-center justify-center shrink-0">
@@ -279,9 +353,39 @@
         <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-10">
             <!-- Header / Navbar -->
             <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                <!-- LOGO KIRI ATAS DI DALAM WEBSITE -->
                 <div class="flex items-center gap-3">
-                    <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-lg">LVL. 20</span>
-                    <h1 class="text-xl font-bold tracking-tight">IRFAN.DEV</h1>
+                    <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center gap-3 select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+                        <div class="rpg-logo-badge relative w-11 h-11 shrink-0 flex items-center justify-center animate-shield-impact">
+                            <svg class="w-11 h-11" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="rpgShieldGradMain" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#34d399"/>
+                                        <stop offset="55%" stop-color="#10b981"/>
+                                        <stop offset="100%" stop-color="#38bdf8"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M32 5L53 13.5V29.5C53 43.2 44.1 54.4 32 59C19.9 54.4 11 43.2 11 29.5V13.5L32 5Z" fill="#071224" stroke="url(#rpgShieldGradMain)" stroke-width="3"/>
+                                <path d="M32 11L47 17.2V29.1C47 39.8 40.3 48.6 32 52.5C23.7 48.6 17 39.8 17 29.1V17.2L32 11Z" stroke="url(#rpgShieldGradMain)" stroke-opacity="0.35" stroke-width="1.5"/>
+                                <text x="32" y="38" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="800" font-family="sans-serif">I</text>
+                            </svg>
+                            <svg class="rpg-sword absolute inset-0 w-11 h-11 animate-sword-strike pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M46 14L23 37L27 41L50 18L52 12L46 14Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.2"/>
+                                <path d="M19 33L31 45" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round"/>
+                                <path d="M23 39L16 46" stroke="#10b981" stroke-width="3.4" stroke-linecap="round"/>
+                                <circle cx="31" cy="33" r="2.2" fill="#38bdf8"/>
+                            </svg>
+                        </div>
+                        <div class="leading-tight text-left">
+                            <div class="text-base sm:text-lg font-extrabold tracking-wide text-slate-900 dark:text-white">
+                                IRFAN<span class="text-emerald-500 dark:text-emerald-400">.DEV</span>
+                            </div>
+                            <div class="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-300/85">
+                                RPG Realm
+                            </div>
+                        </div>
+                    </button>
+                    <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-2.5 py-1 rounded-lg shadow">LVL. 20</span>
                 </div>
                 <nav class="flex items-center gap-6 text-sm font-medium">
                     <a href="#profil" class="hover:text-accentGreen transition hidden sm:inline">Profil</a>
@@ -557,6 +661,23 @@
 
     <!-- JavaScript Interaktif -->
     <script>
+        // Putar Ulang Animasi Pedang Menusuk Logo
+        function replaySwordAnim(btnEl) {
+            if (!btnEl) return;
+            const sword = btnEl.querySelector('.rpg-sword');
+            const badge = btnEl.querySelector('.rpg-logo-badge');
+            if (sword) {
+                sword.classList.remove('animate-sword-strike');
+                void sword.offsetWidth;
+                sword.classList.add('animate-sword-strike');
+            }
+            if (badge) {
+                badge.classList.remove('animate-shield-impact');
+                void badge.offsetWidth;
+                badge.classList.add('animate-shield-impact');
+            }
+        }
+
         // Efek Bicara (Balon Teks + Suara Browser Opsional)
         function typeSpeechText(text) {
             const bubble = document.getElementById('speechBubbleText');
@@ -604,6 +725,8 @@
             welcome.classList.add('is-leaving');
             setTimeout(() => {
                 mainContent.classList.add('is-entering');
+                const mainLogoBtn = mainContent.querySelector('header button[onclick*="replaySwordAnim"]');
+                replaySwordAnim(mainLogoBtn);
             }, 180);
         }
 
@@ -614,6 +737,8 @@
             mainContent.classList.remove('is-entering');
             welcome.classList.remove('is-leaving');
             typeSpeechText('Selamat datang');
+            const welcomeLogoBtn = welcome.querySelector('button[onclick*="replaySwordAnim"]');
+            replaySwordAnim(welcomeLogoBtn);
         }
 
         // Logika Tombol Tema (Dark/Light Mode)
