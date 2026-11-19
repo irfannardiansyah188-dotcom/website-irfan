@@ -55,6 +55,10 @@
             0%, 100% { transform: translateY(0px) scale(1); }
             50% { transform: translateY(-10px) scale(1.02); }
         }
+        @keyframes speakBob {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.025); }
+        }
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.55; }
             50% { opacity: 0.95; }
@@ -70,6 +74,9 @@
         }
         .animate-float-slow {
             animation: floatSlow 6s ease-in-out infinite;
+        }
+        .animate-speak-bob {
+            animation: speakBob 2.2s ease-in-out infinite;
         }
         .animate-pulse-glow {
             animation: pulseGlow 4s ease-in-out infinite;
@@ -130,30 +137,48 @@
         <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-emerald-400/60 rounded-bl-lg pointer-events-none"></div>
         <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-emerald-400/60 rounded-br-lg pointer-events-none"></div>
 
-        <!-- Wadah Utama: Foto Proporsional di Kiri + Ucapan Selamat Datang di Kanan -->
+        <!-- Wadah Utama: Foto Berbicara di Kiri + Ucapan Selamat Datang di Kanan -->
         <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
             
-            <!-- FOTO KARAKTER -->
-            <div class="relative flex items-center justify-center shrink-0">
+            <!-- FOTO KARAKTER BERBICARA -->
+            <div class="relative flex flex-col items-center justify-center shrink-0 space-y-3">
+                <!-- Balon Dialog Ucapan -->
+                <div class="relative bg-slate-900/95 border border-emerald-400/50 text-emerald-200 px-4 py-2.5 rounded-2xl shadow-[0_0_24px_rgba(16,185,129,0.25)] max-w-[270px] text-center">
+                    <p id="speechBubbleText" class="text-xs sm:text-sm font-bold leading-snug">
+                        "Selamat datang di website Bang Irfan"
+                    </p>
+                    <div class="w-3 h-3 bg-slate-900 border-r border-b border-emerald-400/50 rotate-45 mx-auto -mb-4 mt-1.5"></div>
+                </div>
+
                 <!-- Lingkaran Sihir SVG di Belakang Foto -->
-                <svg class="absolute w-[310px] h-[310px] sm:w-[400px] sm:h-[400px] text-emerald-400/35 animate-spin-slow pointer-events-none" viewBox="0 0 200 200" fill="none">
+                <svg class="absolute top-12 w-[300px] h-[300px] sm:w-[370px] sm:h-[370px] text-emerald-400/35 animate-spin-slow pointer-events-none" viewBox="0 0 200 200" fill="none">
                     <circle cx="100" cy="100" r="94" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4"/>
                     <circle cx="100" cy="100" r="82" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="1.2"/>
                     <polygon points="100,12 176,144 24,144" stroke="currentColor" stroke-width="0.9"/>
                     <polygon points="100,188 176,56 24,56" stroke="#38bdf8" stroke-opacity="0.45" stroke-width="0.9"/>
                 </svg>
 
-                <!-- Bingkai Foto Proporsional -->
-                <div class="relative w-52 h-64 sm:w-64 sm:h-80 md:w-72 md:h-[360px] rounded-3xl overflow-hidden border-2 border-emerald-400/40 shadow-[0_0_40px_rgba(16,185,129,0.25)] bg-slate-900/60 animate-float-slow">
+                <!-- Bingkai Foto irfan-puzzle.jpg -->
+                <div id="speakerFrame" class="relative w-52 h-64 sm:w-64 sm:h-76 md:w-72 md:h-[340px] rounded-3xl overflow-hidden border-2 border-emerald-400/50 shadow-[0_0_40px_rgba(16,185,129,0.3)] bg-slate-900/60 animate-speak-bob">
                     <img
-                        src="foto-profil.png"
-                        onerror="this.onerror=null; this.src='irfan-puzzle.jpg';"
-                        alt="Irfan Ardiansyah"
+                        src="irfan-puzzle.jpg"
+                        onerror="this.onerror=null; this.src='foto-profil.png';"
+                        alt="Bang Irfan Menyapa"
                         class="w-full h-full object-cover object-top"
                     />
                     <!-- Gradasi Bawah Halus -->
                     <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#060b16] via-[#060b16]/50 to-transparent pointer-events-none"></div>
                 </div>
+
+                <!-- Tombol Putar Ulang Ucapan & Suara -->
+                <button
+                    type="button"
+                    onclick="speakWelcome('Selamat datang di website Bang Irfan')"
+                    class="inline-flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 border border-emerald-400/40 text-emerald-300 text-xs font-semibold px-3.5 py-2 rounded-xl transition shadow cursor-pointer"
+                >
+                    <i id="speakIcon" class="fa-solid fa-volume-high text-emerald-400"></i>
+                    <span>Ucapkan Sapaan</span>
+                </button>
             </div>
 
             <!-- KONTEN UCAPAN SELAMAT DATANG -->
@@ -203,13 +228,13 @@
                 <!-- Info IG & Email di Tampilan Depan -->
                 <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs sm:text-sm">
                     <a
-                        href="https://instagram.com/fann_03"
+                        href="https://instagram.com/fann_372"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 bg-slate-900/85 hover:bg-slate-800 border border-pink-400/35 text-pink-300 px-3.5 py-2 rounded-xl backdrop-blur-md transition"
                     >
                         <i class="fa-brands fa-instagram text-pink-400"></i>
-                        <span>IG: <strong>fann_03</strong></span>
+                        <span>IG: <strong>fann_372</strong></span>
                     </a>
                     <a
                         href="mailto:irfannardiansyah188@gmail.com"
@@ -517,8 +542,47 @@
 
     <!-- JavaScript Interaktif -->
     <script>
+        // Efek Bicara (Balon Teks + Suara Browser Opsional)
+        function typeSpeechText(text) {
+            const bubble = document.getElementById('speechBubbleText');
+            if (!bubble) return;
+            bubble.innerText = '';
+            const fullQuote = `"${text}"`;
+            let i = 0;
+            clearInterval(window._speechTypingInterval);
+            window._speechTypingInterval = setInterval(() => {
+                bubble.innerText += fullQuote.charAt(i);
+                i++;
+                if (i >= fullQuote.length) {
+                    clearInterval(window._speechTypingInterval);
+                }
+            }, 35);
+        }
+
+        function speakWelcome(text = 'Selamat datang di website Bang Irfan') {
+            typeSpeechText(text);
+            const icon = document.getElementById('speakIcon');
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.98;
+                utterance.onstart = () => {
+                    if (icon) icon.classList.add('fa-beat-fade');
+                };
+                utterance.onend = () => {
+                    if (icon) icon.classList.remove('fa-beat-fade');
+                };
+                utterance.onerror = () => {
+                    if (icon) icon.classList.remove('fa-beat-fade');
+                };
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
         // Transisi Layar Selamat Datang -> Konten Utama
         function enterWebsite() {
+            speakWelcome('Selamat datang di website Bang Irfan');
             const welcome = document.getElementById('welcome-screen');
             const mainContent = document.getElementById('main-content');
 
@@ -534,6 +598,7 @@
 
             mainContent.classList.remove('is-entering');
             welcome.classList.remove('is-leaving');
+            typeSpeechText('Selamat datang di website Bang Irfan');
         }
 
         // Logika Tombol Tema (Dark/Light Mode)
@@ -666,48 +731,9 @@
             }
         }
 
-        // Jalankan puzzle saat halaman dimuat
+        // Jalankan puzzle & efek ketik sapaan saat halaman dimuat
         acakPuzzle();
-
-        // Logika Quest Log (To-Do List)
-        function addTodo() {
-            const input = document.getElementById('todoInput');
-            const text = input.value.trim();
-            if (!text) {
-                alert("Masukkan nama quest terlebih dahulu!");
-                return;
-            }
-
-            const list = document.getElementById('todoList');
-            const li = document.createElement('li');
-            li.className = "flex items-center justify-between p-3 bg-slate-50 dark:bg-darkBg/60 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm transition";
-            li.innerHTML = `
-                <span class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
-                    <input type="checkbox" onclick="this.nextElementSibling.classList.toggle('line-through'); this.nextElementSibling.classList.toggle('opacity-50')" class="accent-emerald-500 w-4 h-4 rounded cursor-pointer">
-                    <span>${text}</span>
-                </span>
-                <button onclick="this.parentElement.remove()" class="text-rose-500 hover:text-rose-400 text-xs font-semibold px-2 py-1"><i class="fa-solid fa-trash"></i></button>
-            `;
-            list.appendChild(li);
-            input.value = '';
-        }
-
-        // Logika Kirim Pesan Kontak
-        function sendGuildMessage() {
-            const name = document.getElementById('senderName').value.trim();
-            const email = document.getElementById('senderEmail').value.trim();
-            const message = document.getElementById('senderMessage').value.trim();
-
-            if (!name || !email || !message) {
-                alert("Mohon lengkapi semua kolom surat terlebih dahulu, Petualang!");
-                return;
-            }
-
-            alert(`Terima kasih, ${name}! Suratmu berhasil dikirim ke Guild Irfan Ardiansyah.`);
-            document.getElementById('senderName').value = '';
-            document.getElementById('senderEmail').value = '';
-            document.getElementById('senderMessage').value = '';
-        }
+        typeSpeechText('Selamat datang di website Bang Irfan');
     </script>
 </body>
 </html>
