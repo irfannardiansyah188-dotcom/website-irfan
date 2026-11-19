@@ -77,39 +77,44 @@
         @keyframes swordStrike {
             0% {
                 opacity: 0;
-                transform: translate(34px, -34px) rotate(45deg) scale(1.15);
+                translate: 26px -26px;
+                scale: 1.15;
             }
             55% {
                 opacity: 1;
-                transform: translate(4px, -4px) rotate(45deg) scale(1);
+                translate: 4px -4px;
+                scale: 1;
             }
             72% {
-                transform: translate(-3px, 3px) rotate(45deg) scale(0.98);
+                translate: -3px 3px;
+                scale: 0.97;
             }
             100% {
                 opacity: 1;
-                transform: translate(0px, 0px) rotate(45deg) scale(1);
+                translate: 0px 0px;
+                scale: 1;
             }
         }
         @keyframes shieldImpact {
             0%, 52% {
-                transform: scale(1);
+                scale: 1;
                 filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.35));
             }
             68% {
-                transform: scale(0.92);
-                filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.9));
+                scale: 0.91;
+                filter: drop-shadow(0 0 26px rgba(56, 189, 248, 0.95));
             }
             100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.55));
+                scale: 1;
+                filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.6));
             }
         }
         .rpg-logo-badge {
-            animation: shieldImpact 0.95s ease-out forwards;
+            animation: shieldImpact 0.9s ease-out forwards;
         }
         .rpg-sword {
-            animation: swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transform-origin: center;
+            animation: swordStrike 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .animate-float-slow {
@@ -179,7 +184,7 @@
 
         <!-- LOGO KIRI ATAS TAMPILAN DEPAN -->
         <div class="fixed top-7 left-7 z-20">
-            <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+            <button type="button" onclick="replaySwordAnim(this)" class="rpg-logo-btn inline-flex items-center select-none group text-left cursor-pointer active:scale-95 transition-transform" title="Klik untuk memutar ulang animasi pedang">
                 <div class="rpg-logo-badge relative w-14 h-14 shrink-0 flex items-center justify-center">
                     <svg class="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -347,7 +352,7 @@
             <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
                 <!-- LOGO KIRI ATAS DI DALAM WEBSITE -->
                 <div class="flex items-center gap-3">
-                    <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+                    <button type="button" onclick="replaySwordAnim(this)" class="rpg-logo-btn inline-flex items-center select-none group text-left cursor-pointer active:scale-95 transition-transform" title="Klik untuk memutar ulang animasi pedang">
                         <div class="rpg-logo-badge relative w-14 h-14 shrink-0 flex items-center justify-center">
                             <svg class="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -650,15 +655,19 @@
             if (!btnEl) return;
             const sword = btnEl.querySelector('.rpg-sword');
             const badge = btnEl.querySelector('.rpg-logo-badge');
+
             if (sword) {
                 sword.style.animation = 'none';
-                void sword.offsetWidth;
-                sword.style.animation = 'swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+                sword.style.opacity = '0';
+                setTimeout(() => {
+                    sword.style.animation = 'swordStrike 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards';
+                }, 20);
             }
             if (badge) {
                 badge.style.animation = 'none';
-                void badge.offsetWidth;
-                badge.style.animation = 'shieldImpact 0.95s ease-out forwards';
+                setTimeout(() => {
+                    badge.style.animation = 'shieldImpact 0.9s ease-out forwards';
+                }, 20);
             }
         }
 
@@ -709,7 +718,7 @@
             welcome.classList.add('is-leaving');
             setTimeout(() => {
                 mainContent.classList.add('is-entering');
-                const mainLogoBtn = mainContent.querySelector('header button[onclick*="replaySwordAnim"]');
+                const mainLogoBtn = mainContent.querySelector('header .rpg-logo-btn');
                 replaySwordAnim(mainLogoBtn);
             }, 180);
         }
@@ -721,7 +730,7 @@
             mainContent.classList.remove('is-entering');
             welcome.classList.remove('is-leaving');
             typeSpeechText('Selamat datang');
-            const welcomeLogoBtn = welcome.querySelector('button[onclick*="replaySwordAnim"]');
+            const welcomeLogoBtn = welcome.querySelector('.rpg-logo-btn');
             replaySwordAnim(welcomeLogoBtn);
         }
 
