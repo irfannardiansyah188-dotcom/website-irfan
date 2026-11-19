@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Irfan Ardiansyah - Ultimate RPG Portfolio & Mini Game</title>
+    <meta name="description" content="Portofolio RPG interaktif, statistik skill karakter, dan mini game milik Irfan Ardiansyah.">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -52,20 +53,20 @@
         /* Animasi Grafis & Perpindahan Welcome Screen */
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-14px) scale(1.04); }
+            50% { transform: translateY(-12px) scale(1.03); }
         }
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.45; }
-            50% { opacity: 0.85; }
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 0.95; }
         }
         @keyframes spinSlow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         @keyframes drift {
-            0% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-            50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
-            100% { transform: translateY(-80px) translateX(-10px); opacity: 0; }
+            0% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
+            50% { transform: translateY(-45px) translateX(18px); opacity: 0.9; }
+            100% { transform: translateY(-90px) translateX(-10px); opacity: 0; }
         }
         .animate-float-slow {
             animation: floatSlow 6s ease-in-out infinite;
@@ -74,23 +75,23 @@
             animation: pulseGlow 4s ease-in-out infinite;
         }
         .animate-spin-slow {
-            animation: spinSlow 30s linear infinite;
+            animation: spinSlow 28s linear infinite;
         }
         .animate-spin-reverse {
-            animation: spinSlow 20s linear infinite reverse;
+            animation: spinSlow 18s linear infinite reverse;
         }
         .particle {
             position: absolute;
-            background: radial-gradient(circle, rgba(16,185,129,0.8) 0%, rgba(16,185,129,0) 70%);
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.95) 0%, rgba(16, 185, 129, 0) 70%);
             border-radius: 50%;
             pointer-events: none;
-            animation: drift 8s linear infinite;
+            animation: drift 7s linear infinite;
         }
         .welcome-grid-bg {
             background-image:
-                linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
-            background-size: 44px 44px;
+                linear-gradient(to right, rgba(16, 185, 129, 0.12) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+            background-size: 42px 42px;
         }
         #welcome-screen.is-leaving {
             opacity: 0;
@@ -106,99 +107,101 @@
 <body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300 overflow-x-hidden">
 
     <!-- LAYAR UCAPAN SELAMAT DATANG FULL LAYAR -->
-    <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#070b14] text-white transition-all duration-700 ease-in-out overflow-hidden">
-        <!-- Latar Belakang Foto Profil -->
+    <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060b16] text-white transition-all duration-700 ease-in-out overflow-hidden">
+        
+        <!-- Latar Belakang Foto Profil (Dibuat Terang & Jelas) -->
         <div class="absolute inset-0 w-full h-full">
             <img
                 src="foto-profil.png"
+                onerror="this.onerror=null; this.src='irfan-puzzle.jpg';"
                 alt="Latar Belakang Irfan Ardiansyah"
-                class="absolute inset-0 w-full h-full object-cover object-top scale-105 opacity-35"
+                class="w-full h-full object-cover object-top opacity-75"
             />
-            <!-- Lapisan Grafis Gradasi & Kegelapan -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#070b14] via-[#070b14]/75 to-[#070b14]/50"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-[#070b14] via-transparent to-[#070b14]"></div>
+            <!-- Gradasi tipis agar foto tetap terlihat jelas namun teks tetap kontras -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#060b16] via-[#060b16]/45 to-[#060b16]/35"></div>
+            <div class="absolute inset-0 bg-radial from-transparent via-[#060b16]/30 to-[#060b16]/80"></div>
             <div class="absolute inset-0 welcome-grid-bg pointer-events-none"></div>
         </div>
 
-        <!-- EFEK-EFEK GRAFIS RPG MENARIK (Aura, Cahaya, Runes) -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <!-- Lingkaran Runes/Sihir (Magic Circle) di Belakang -->
-            <div class="absolute -top-10 -left-10 md:left-20 w-[300px] h-[300px] md:w-[600px] md:h-[600px] border-2 border-emerald-500/10 rounded-full flex items-center justify-center animate-spin-slow opacity-60">
-                <div class="w-[85%] h-[85%] border border-dashed border-emerald-400/10 rounded-full flex items-center justify-center">
-                    <div class="w-[70%] h-[70%] border border-emerald-500/5 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-wand-sparkles text-emerald-500/5 text-4xl animate-spin-reverse"></i>
-                    </div>
-                </div>
-            </div>
+        <!-- EFEK GRAFIS MAGIC CIRCLE & PARTIKEL RPG -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+            <!-- Lingkaran Sihir SVG Menyala di Belakang Teks -->
+            <svg class="w-[460px] h-[460px] sm:w-[680px] sm:h-[680px] text-emerald-400/25 animate-spin-slow" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="94" stroke="currentColor" stroke-width="0.8" stroke-dasharray="6 4"/>
+                <circle cx="100" cy="100" r="82" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="1"/>
+                <polygon points="100,12 176,144 24,144" stroke="currentColor" stroke-width="0.8"/>
+                <polygon points="100,188 176,56 24,56" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="0.8"/>
+                <circle cx="100" cy="100" r="56" stroke="currentColor" stroke-width="0.7" stroke-dasharray="2 3"/>
+            </svg>
 
-            <!-- Kilatan Cahaya/Pilar Energi di Kiri-Kanan -->
-            <div class="absolute top-1/4 left-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
-            <div class="absolute bottom-1/4 right-12 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float-slow"></div>
+            <!-- Cahaya Aura Hijau & Biru -->
+            <div class="absolute top-1/4 left-10 w-72 h-72 bg-emerald-400/20 rounded-full blur-3xl animate-pulse-glow"></div>
+            <div class="absolute bottom-1/4 right-10 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-float-slow"></div>
 
-            <!-- Partikel Kecil Berterbangan (Magic Sparkles) -->
-            <div class="particle w-2 h-2" style="top: 80%; left: 15%; animation-delay: 0s; animation-duration: 6s;"></div>
-            <div class="particle w-3 h-3" style="top: 70%; left: 45%; animation-delay: 1.5s; animation-duration: 9s;"></div>
-            <div class="particle w-1.5 h-1.5" style="top: 60%; left: 75%; animation-delay: 3s; animation-duration: 7s;"></div>
-            <div class="particle w-4 h-4" style="top: 85%; left: 30%; animation-delay: 4.5s; animation-duration: 10s;"></div>
-            <div class="particle w-2 h-2" style="top: 50%; left: 85%; animation-delay: 2s; animation-duration: 8s;"></div>
-            <div class="particle w-3 h-3" style="top: 90%; left: 60%; animation-delay: 0.5s; animation-duration: 11s;"></div>
+            <!-- Partikel Cahaya Melayang -->
+            <div class="particle w-2.5 h-2.5" style="top: 82%; left: 16%; animation-delay: 0s; animation-duration: 6s;"></div>
+            <div class="particle w-3 h-3" style="top: 72%; left: 42%; animation-delay: 1.2s; animation-duration: 8s;"></div>
+            <div class="particle w-2 h-2" style="top: 64%; left: 76%; animation-delay: 2.5s; animation-duration: 6.5s;"></div>
+            <div class="particle w-3.5 h-3.5" style="top: 86%; left: 28%; animation-delay: 3.8s; animation-duration: 9s;"></div>
+            <div class="particle w-2.5 h-2.5" style="top: 54%; left: 84%; animation-delay: 1.8s; animation-duration: 7.5s;"></div>
+            <div class="particle w-3 h-3" style="top: 88%; left: 62%; animation-delay: 0.6s; animation-duration: 9.5s;"></div>
         </div>
 
-        <!-- Ornamen Bingkai Fantasi -->
-        <div class="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-emerald-500/40 rounded-tl-lg pointer-events-none"></div>
-        <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-emerald-500/40 rounded-tr-lg pointer-events-none"></div>
-        <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-emerald-500/40 rounded-bl-lg pointer-events-none"></div>
-        <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-emerald-500/40 rounded-br-lg pointer-events-none"></div>
+        <!-- Ornamen Sudut Bingkai -->
+        <div class="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-emerald-400/60 rounded-tl-lg pointer-events-none"></div>
+        <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-emerald-400/60 rounded-tr-lg pointer-events-none"></div>
+        <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-emerald-400/60 rounded-bl-lg pointer-events-none"></div>
+        <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-emerald-400/60 rounded-br-lg pointer-events-none"></div>
 
-        <!-- Konten Ucapan Selamat Datang di Tengah -->
+        <!-- Konten Ucapan Selamat Datang -->
         <div class="relative z-10 w-full max-w-4xl mx-auto px-6 py-10 text-center space-y-6">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg animate-float-slow">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/70 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg animate-float-slow">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>IRFAN.DEV • RPG PORTFOLIO REALM</span>
             </div>
 
-            <div class="space-y-3">
-                <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-blue-300/90 font-semibold">
+            <div class="space-y-3 bg-slate-950/45 backdrop-blur-sm border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-blue-300 font-semibold">
                     Selamat Datang di Website Resmi
                 </p>
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.75)]">
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
                     Halo, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">Petualang!</span>
                 </h1>
-                <p class="text-sm sm:text-base md:text-lg text-slate-200/90 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-sm sm:text-base md:text-lg text-slate-100 max-w-2xl mx-auto leading-relaxed drop-shadow">
                     Selamat datang di dunia digital <strong class="text-white">Irfan Ardiansyah</strong>. Jelajahi statistik skill karakter, selesaikan daftar quest, dan mainkan mini game seru di dalam satu layar penuh.
                 </p>
-            </div>
 
-            <!-- Kartu Mini Highlight -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left pt-1">
-                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
-                    <i class="fa-solid fa-bolt text-emerald-400 text-lg"></i>
-                    <div>
-                        <p class="text-xs font-bold text-white">Character Stats</p>
-                        <p class="text-[11px] text-slate-300">Skill & profil interaktif</p>
+                <!-- Kartu Mini Highlight -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left pt-3">
+                    <div class="bg-slate-900/80 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3">
+                        <i class="fa-solid fa-bolt text-emerald-400 text-lg"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">Character Stats</p>
+                            <p class="text-[11px] text-slate-300">Skill & profil interaktif</p>
+                        </div>
                     </div>
-                </div>
-                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
-                    <i class="fa-solid fa-gamepad text-blue-400 text-lg"></i>
-                    <div>
-                        <p class="text-xs font-bold text-white">Mini Game Quest</p>
-                        <p class="text-[11px] text-slate-300">Boss raid & photo puzzle</p>
+                    <div class="bg-slate-900/80 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3">
+                        <i class="fa-solid fa-gamepad text-blue-400 text-lg"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">Mini Game Quest</p>
+                            <p class="text-[11px] text-slate-300">Boss raid & photo puzzle</p>
+                        </div>
                     </div>
-                </div>
-                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
-                    <i class="fa-solid fa-scroll text-amber-400 text-lg"></i>
-                    <div>
-                        <p class="text-xs font-bold text-white">Guild Quest Log</p>
-                        <p class="text-[11px] text-slate-300">Catatan & kontak langsung</p>
+                    <div class="bg-slate-900/80 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3">
+                        <i class="fa-solid fa-scroll text-amber-400 text-lg"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">Guild Quest Log</p>
+                            <p class="text-[11px] text-slate-300">Catatan & kontak langsung</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Tombol Masuk dengan Animasi Perpindahan -->
-            <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div class="pt-1 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                     onclick="enterWebsite()"
-                    class="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.45)] hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+                    class="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.55)] hover:shadow-[0_0_45px_rgba(16,185,129,0.8)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                 >
                     <span>Mulai Petualangan</span>
                     <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
@@ -237,6 +240,7 @@
                 <div class="relative w-full md:w-[44%] h-[360px] sm:h-[400px] md:h-auto shrink-0 overflow-hidden bg-slate-900">
                     <img 
                         src="foto-profil.png" 
+                        onerror="this.onerror=null; this.src='irfan-puzzle.jpg';"
                         alt="Foto Profil Irfan Ardiansyah" 
                         class="w-full h-full object-cover object-top"
                     />
