@@ -48,286 +48,417 @@
         .puzzle-piece:active {
             transform: scale(0.95);
         }
+
+        /* Animasi Grafis & Perpindahan Welcome Screen */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-14px) scale(1.04); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 0.85; }
+        }
+        .animate-float-slow {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        .welcome-grid-bg {
+            background-image:
+                linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+            background-size: 44px 44px;
+        }
+        #welcome-screen.is-leaving {
+            opacity: 0;
+            transform: translateY(-36px) scale(1.03);
+            pointer-events: none;
+        }
+        #main-content.is-entering {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300">
+<body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300 overflow-x-hidden">
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
-        <!-- Header / Navbar -->
-        <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-            <div class="flex items-center gap-3">
-                <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-lg">LVL. 20</span>
-                <h1 class="text-xl font-bold tracking-tight">IRFAN.DEV</h1>
+    <!-- LAYAR UCAPAN SELAMAT DATANG FULL LAYAR -->
+    <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#070b14] text-white transition-all duration-700 ease-in-out overflow-hidden">
+        <!-- Latar Belakang Foto Profil -->
+        <img
+            src="foto-profil.png"
+            alt="Latar Belakang Irfan Ardiansyah"
+            class="absolute inset-0 w-full h-full object-cover object-top scale-105 opacity-45"
+        />
+
+        <!-- Lapisan Grafis Gradasi, Grid & Cahaya Neon -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#070b14] via-[#070b14]/70 to-[#0f172a]/75"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#070b14]/85 via-transparent to-[#070b14]/85"></div>
+        <div class="absolute inset-0 welcome-grid-bg pointer-events-none"></div>
+
+        <!-- Orb Cahaya Dekoratif -->
+        <div class="absolute -top-24 -left-24 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl animate-pulse-glow pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float-slow pointer-events-none"></div>
+
+        <!-- Konten Ucapan Selamat Datang di Tengah -->
+        <div class="relative z-10 w-full max-w-4xl mx-auto px-6 py-10 text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>IRFAN.DEV • RPG PORTFOLIO REALM</span>
             </div>
-            <nav class="flex items-center gap-6 text-sm font-medium">
-                <a href="#profil" class="hover:text-accentGreen transition hidden sm:inline">Profil</a>
-                <a href="#quests" class="hover:text-accentGreen transition hidden sm:inline">Quest</a>
-                <a href="#puzzle-section" class="hover:text-accentGreen transition hidden sm:inline text-accentGreen font-bold">Mini Game</a>
-                <!-- Tombol Toggle Tema -->
-                <button onclick="toggleTheme()" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-yellow-400 p-2 rounded-xl transition shadow hover:scale-105" title="Ganti Tema">
-                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+
+            <div class="space-y-3">
+                <p class="text-xs sm:text-sm uppercase tracking-[0.25em] text-blue-300/90 font-semibold">
+                    Selamat Datang di Website Resmi
+                </p>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.75)]">
+                    Halo, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400">Petualang!</span>
+                </h1>
+                <p class="text-sm sm:text-base md:text-lg text-slate-200/90 max-w-2xl mx-auto leading-relaxed">
+                    Selamat datang di dunia digital <strong class="text-white">Irfan Ardiansyah</strong>. Jelajahi statistik skill karakter, selesaikan daftar quest, dan mainkan mini game seru di dalam satu layar penuh.
+                </p>
+            </div>
+
+            <!-- Kartu Mini Highlight -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left pt-1">
+                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-emerald-400 text-lg"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Character Stats</p>
+                        <p class="text-[11px] text-slate-300">Skill & profil interaktif</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-blue-400 text-lg"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Mini Game Quest</p>
+                        <p class="text-[11px] text-slate-300">Boss raid & photo puzzle</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900/70 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3">
+                    <i class="fa-solid fa-scroll text-amber-400 text-lg"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Guild Quest Log</p>
+                        <p class="text-[11px] text-slate-300">Catatan & kontak langsung</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Masuk dengan Animasi Perpindahan -->
+            <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                    onclick="enterWebsite()"
+                    class="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.45)] hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+                >
+                    <span>Masuk ke Website</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
                 </button>
-            </nav>
-        </header>
-
-        <!-- HERO SECTION: FOTO FULL MENYATU DENGAN SKILL KARAKTER -->
-        <section id="profil" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700/80 rounded-2xl shadow-xl relative overflow-hidden transition-colors flex flex-col md:flex-row min-h-[460px]">
-            
-            <!-- Sisi Kiri: Foto Full Menyatu -->
-            <div class="relative w-full md:w-[44%] h-[340px] sm:h-[380px] md:h-auto shrink-0 overflow-hidden bg-slate-900">
-                <img 
-                    src="foto-profil.png" 
-                    alt="Foto Profil Irfan Ardiansyah" 
-                    class="w-full h-full object-cover object-top"
-                />
-                <!-- Gradasi menyatu ke kanan (Desktop) -->
-                <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-cardBg/35 to-cardBg pointer-events-none"></div>
-                <!-- Gradasi menyatu ke bawah (Mobile) -->
-                <div class="block md:hidden absolute inset-0 bg-gradient-to-b from-transparent via-white/30 dark:via-cardBg/45 to-white dark:to-cardBg pointer-events-none"></div>
-                <!-- Aksen cahaya -->
-                <div class="absolute -bottom-10 -left-10 w-52 h-52 bg-accentGreen/15 rounded-full blur-3xl pointer-events-none"></div>
             </div>
+        </div>
+    </div>
 
-            <!-- Sisi Kanan: Identitas & Statistik Skill Menyatu -->
-            <div class="relative z-10 w-full md:w-[56%] p-6 md:p-8 md:-ml-6 flex flex-col justify-between space-y-6">
-                <div class="space-y-3">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-accentBlue border border-blue-500/20">
-                            Mahasiswa Sistem Informasi
-                        </span>
-                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-accentGreen border border-emerald-500/20">
-                            <i class="fa-solid fa-shield-halved text-[11px]"></i> Ready for Quest
-                        </span>
-                    </div>
-
-                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Irfan Ardiansyah</h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        Berfokus mengeksplorasi pengembangan sistem web, logika pemrograman, dan merancang solusi digital yang interaktif serta fungsional.
-                    </p>
+    <!-- KONTEN UTAMA WEBSITE -->
+    <div id="main-content" class="opacity-0 translate-y-8 transition-all duration-700 ease-out">
+        <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-10">
+            <!-- Header / Navbar -->
+            <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-lg">LVL. 20</span>
+                    <h1 class="text-xl font-bold tracking-tight">IRFAN.DEV</h1>
                 </div>
-
-                <!-- Statistik Skill Karakter Menyatu di Samping Foto -->
-                <div id="skills" class="space-y-3">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-bar text-accentBlue"></i> Statistik Skill Karakter
-                    </h3>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span>HTML / CSS / Tailwind</span>
-                                <span class="text-accentGreen">85%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-accentGreen h-full rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span>JavaScript Logic & DOM</span>
-                                <span class="text-accentBlue">75%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-accentBlue h-full rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span>Database & Sistem Informasi</span>
-                                <span class="text-amber-500 dark:text-amber-400">70%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-amber-500 dark:bg-amber-400 h-full rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
-                            <div class="flex justify-between text-xs font-semibold">
-                                <span>Problem Solving & Algoritma</span>
-                                <span class="text-purple-500 dark:text-purple-400">80%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-purple-500 dark:bg-purple-400 h-full rounded-full" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lokasi -->
-                <div class="pt-3 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
-                    <span class="flex items-center gap-1.5">
-                        <i class="fa-solid fa-location-dot text-rose-500"></i> Jambi, Indonesia
-                    </span>
-                    <span class="font-medium text-slate-600 dark:text-slate-300">
-                        <i class="fa-solid fa-code text-accentGreen mr-1"></i> RPG Character Sheet
-                    </span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Daftar Quest (Proyek Selesai) -->
-        <section id="quests" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-scroll text-accentBlue"></i> Daftar Quest (Proyek Selesai)
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Quest 1: Split Bill -->
-                <a href="split-bill.html" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between hover:border-accentGreen transition group block shadow-lg">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-accentGreen px-2.5 py-1 rounded border border-emerald-500/20">Web App</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400"><i class="fa-solid fa-star text-amber-400 mr-1"></i> Featured</span>
-                        </div>
-                        <h3 class="text-lg font-bold group-hover:text-accentGreen transition">Split Bill & Kalkulator Patungan</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm">
-                            Aplikasi web interaktif untuk menghitung patungan makan bareng atau belanja secara adil, dilengkapi kalkulasi pajak.
-                        </p>
-                    </div>
-                    <div class="pt-6 flex items-center justify-between">
-                        <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
-                            <span>HTML</span> • <span>Tailwind</span> • <span>JS</span>
-                        </div>
-                        <span class="text-xs font-semibold text-accentGreen flex items-center gap-1 group-hover:translate-x-1 transition">
-                            Mainkan Quest <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Quest 2: Mini E-Commerce -->
-                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between opacity-75 shadow-lg">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-bold uppercase tracking-wider bg-blue-500/10 text-accentBlue px-2.5 py-1 rounded border border-blue-500/20">Coming Soon</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Mini E-Commerce Kampus</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm">
-                            Proyek sistem pemesanan online skala kecil untuk lingkungan pertemanan dan kampus.
-                        </p>
-                    </div>
-                    <div class="pt-6 flex items-center justify-between">
-                        <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
-                            <span>PHP</span> • <span>MySQL</span>
-                        </div>
-                        <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Locked <i class="fa-solid fa-lock text-xs ml-1"></i></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FITUR MINI GAME 1: Tebak Level Monster -->
-        <section id="minigame" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-gamepad text-accentGreen"></i> Mini Game: Tebak Level Monster (Boss Raid)
-            </h2>
-            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-xl mx-auto">
-                <div class="space-y-2">
-                    <span class="bg-emerald-500/10 text-accentGreen text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20">Tantangan Harian</span>
-                    <h3 class="text-2xl font-extrabold">Tebak Level Monster Liar!</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">
-                        Monster misterius muncul di hutan! Tebak angka levelnya antara <strong class="text-accentGreen">1 sampai 100</strong>. Kamu memiliki <strong id="chanceCount" class="text-accentBlue">7</strong> kesempatan nyawa!
-                    </p>
-                </div>
-
-                <div id="gameStatus" class="p-4 rounded-xl bg-slate-100 dark:bg-darkBg text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                    Ketik tebakan level monster di bawah untuk memulai pertempuran!
-                </div>
-
-                <div class="flex gap-3 justify-center">
-                    <input type="number" id="guessInput" min="1" max="100" placeholder="Angka 1 - 100" class="w-40 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-center text-sm font-bold focus:outline-none focus:border-accentGreen">
-                    <button onclick="checkGuess()" id="guessBtn" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">
-                        Serang! <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
+                <nav class="flex items-center gap-6 text-sm font-medium">
+                    <a href="#profil" class="hover:text-accentGreen transition hidden sm:inline">Profil</a>
+                    <a href="#quests" class="hover:text-accentGreen transition hidden sm:inline">Quest</a>
+                    <a href="#puzzle-section" class="hover:text-accentGreen transition hidden sm:inline text-accentGreen font-bold">Mini Game</a>
+                    <button onclick="openWelcomeScreen()" class="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-emerald-400 px-3 py-2 rounded-xl text-xs font-semibold transition shadow cursor-pointer" title="Tampilkan Layar Pembuka">
+                        <i class="fa-solid fa-wand-sparkles mr-1"></i> Intro
                     </button>
-                </div>
+                    <!-- Tombol Toggle Tema -->
+                    <button onclick="toggleTheme()" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-yellow-400 p-2 rounded-xl transition shadow hover:scale-105 cursor-pointer" title="Ganti Tema">
+                        <i id="themeIcon" class="fa-solid fa-moon"></i>
+                    </button>
+                </nav>
+            </header>
 
-                <button onclick="resetGame()" id="resetBtn" class="hidden text-xs text-accentBlue hover:underline font-semibold">
-                    <i class="fa-solid fa-rotate-right mr-1"></i> Mainkan Ulang Lawan Monster Baru
-                </button>
-            </div>
-        </section>
-
-        <!-- FITUR MINI GAME 2: RPG Photo Puzzle (TERINTEGRASI DI HALAMAN UTAMA) -->
-        <section id="puzzle-section" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-puzzle-piece text-accentGreen"></i> Mini Game: RPG Photo Puzzle
-            </h2>
-            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-xl mx-auto">
-                <div class="space-y-2">
-                    <span class="bg-amber-500/10 text-amber-500 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/20">Quest Spesial</span>
-                    <h3 class="text-2xl font-extrabold">Susun Puzzle Foto Irfan!</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">
-                        Susun kembali potongan foto Irfan dengan mengklik kotaknya secara berurutan!
-                    </p>
-                </div>
-
-                <div id="puzzle-container"></div>
+            <!-- HERO SECTION: FOTO FULL MENYATU DENGAN SKILL KARAKTER -->
+            <section id="profil" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700/80 rounded-2xl shadow-xl relative overflow-hidden transition-colors flex flex-col md:flex-row min-h-[480px]">
                 
-                <div class="flex justify-center">
-                    <button onclick="acakPuzzle()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
-                        <i class="fa-solid fa-shuffle mr-1"></i> Acak Puzzle
-                    </button>
+                <!-- Sisi Kiri: Foto Full Menyatu -->
+                <div class="relative w-full md:w-[44%] h-[360px] sm:h-[400px] md:h-auto shrink-0 overflow-hidden bg-slate-900">
+                    <img 
+                        src="foto-profil.png" 
+                        alt="Foto Profil Irfan Ardiansyah" 
+                        class="w-full h-full object-cover object-top"
+                    />
+                    <!-- Gradasi menyatu ke kanan (Desktop) -->
+                    <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-cardBg/35 to-cardBg pointer-events-none"></div>
+                    <!-- Gradasi menyatu ke bawah (Mobile) -->
+                    <div class="block md:hidden absolute inset-0 bg-gradient-to-b from-transparent via-white/30 dark:via-cardBg/45 to-white dark:to-cardBg pointer-events-none"></div>
+                    <!-- Aksen cahaya -->
+                    <div class="absolute -bottom-10 -left-10 w-52 h-52 bg-accentGreen/15 rounded-full blur-3xl pointer-events-none"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Quest Log (To-Do List Harian) -->
-        <section id="todo-section" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-list-check text-accentGreen"></i> Quest Log Harian (Catatan Petualangan)
-            </h2>
-            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="flex gap-2">
-                    <input type="text" id="todoInput" placeholder="Tambah quest atau tugas baru..." class="flex-1 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentGreen">
-                    <button onclick="addTodo()" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-5 py-2.5 rounded-xl transition text-sm shadow">
-                        <i class="fa-solid fa-plus mr-1"></i> Tambah
-                    </button>
-                </div>
-                <ul id="todoList" class="space-y-2">
-                    <li class="flex items-center justify-between p-3 bg-slate-50 dark:bg-darkBg/60 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm">
-                        <span class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
-                            <i class="fa-solid fa-circle-dot text-accentGreen text-xs"></i> Menyelesaikan Portofolio RPG Web
+                <!-- Sisi Kanan: Identitas & Statistik Skill Menyatu -->
+                <div class="relative z-10 w-full md:w-[56%] p-6 md:p-8 md:-ml-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-accentBlue border border-blue-500/20">
+                                Mahasiswa Sistem Informasi
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-accentGreen border border-emerald-500/20">
+                                <i class="fa-solid fa-shield-halved text-[11px]"></i> Ready for Quest
+                            </span>
+                        </div>
+
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Irfan Ardiansyah</h2>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            Berfokus mengeksplorasi pengembangan sistem web, logika pemrograman, dan merancang solusi digital yang interaktif serta fungsional.
+                        </p>
+                    </div>
+
+                    <!-- Statistik Skill Karakter Menyatu di Samping Foto -->
+                    <div id="skills" class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-bar text-accentBlue"></i> Statistik Skill Karakter
+                        </h3>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span>HTML / CSS / Tailwind</span>
+                                    <span class="text-accentGreen">85%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-accentGreen h-full rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span>JavaScript Logic & DOM</span>
+                                    <span class="text-accentBlue">75%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-accentBlue h-full rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span>Database & Sistem Informasi</span>
+                                    <span class="text-amber-500 dark:text-amber-400">70%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-amber-500 dark:bg-amber-400 h-full rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                                <div class="flex justify-between text-xs font-semibold">
+                                    <span>Problem Solving & Algoritma</span>
+                                    <span class="text-purple-500 dark:text-purple-400">80%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-purple-500 dark:bg-purple-400 h-full rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lokasi -->
+                    <div class="pt-3 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-rose-500"></i> Jambi, Indonesia
                         </span>
-                        <span class="text-xs text-emerald-600 dark:text-accentGreen font-semibold bg-emerald-500/10 px-2 py-1 rounded">Selesai</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Formulir Kontak ("Kirim Surat ke Guild") -->
-        <section id="contact" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-paper-plane text-accentBlue"></i> Kirim Surat ke Guild (Kontak)
-            </h2>
-            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Nama Petualang / Pengirim</label>
-                        <input type="text" id="senderName" placeholder="Nama kamu" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Email / Kontak</label>
-                        <input type="email" id="senderEmail" placeholder="email@domain.com" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
+                        <span class="font-medium text-slate-600 dark:text-slate-300">
+                            <i class="fa-solid fa-code text-accentGreen mr-1"></i> RPG Character Sheet
+                        </span>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Pesan / Tawaran Quest</label>
-                    <textarea id="senderMessage" rows="3" placeholder="Tulis pesan atau kolaborasi di sini..." class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue"></textarea>
-                </div>
-                <button onclick="sendGuildMessage()" class="w-full bg-accentBlue hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition shadow text-sm">
-                    Kirim Surat <i class="fa-solid fa-envelope-open-text ml-1"></i>
-                </button>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 mt-16 py-6 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Irfan Ardiansyah. Built with code & passion.</p>
-    </footer>
+            <!-- Daftar Quest (Proyek Selesai) -->
+            <section id="quests" class="space-y-6">
+                <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
+                    <i class="fa-solid fa-scroll text-accentBlue"></i> Daftar Quest (Proyek Selesai)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Quest 1: Split Bill -->
+                    <a href="split-bill.html" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between hover:border-accentGreen transition group block shadow-lg">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-accentGreen px-2.5 py-1 rounded border border-emerald-500/20">Web App</span>
+                                <span class="text-xs text-slate-500 dark:text-slate-400"><i class="fa-solid fa-star text-amber-400 mr-1"></i> Featured</span>
+                            </div>
+                            <h3 class="text-lg font-bold group-hover:text-accentGreen transition">Split Bill & Kalkulator Patungan</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                Aplikasi web interaktif untuk menghitung patungan makan bareng atau belanja secara adil, dilengkapi kalkulasi pajak.
+                            </p>
+                        </div>
+                        <div class="pt-6 flex items-center justify-between">
+                            <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
+                                <span>HTML</span> • <span>Tailwind</span> • <span>JS</span>
+                            </div>
+                            <span class="text-xs font-semibold text-accentGreen flex items-center gap-1 group-hover:translate-x-1 transition">
+                                Mainkan Quest <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Quest 2: Mini E-Commerce -->
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between opacity-75 shadow-lg">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold uppercase tracking-wider bg-blue-500/10 text-accentBlue px-2.5 py-1 rounded border border-blue-500/20">Coming Soon</span>
+                            </div>
+                            <h3 class="text-lg font-bold">Mini E-Commerce Kampus</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                                Proyek sistem pemesanan online skala kecil untuk lingkungan pertemanan dan kampus.
+                            </p>
+                        </div>
+                        <div class="pt-6 flex items-center justify-between">
+                            <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
+                                <span>PHP</span> • <span>MySQL</span>
+                            </div>
+                            <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Locked <i class="fa-solid fa-lock text-xs ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FITUR MINI GAME 1: Tebak Level Monster -->
+            <section id="minigame" class="space-y-6">
+                <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-accentGreen"></i> Mini Game: Tebak Level Monster (Boss Raid)
+                </h2>
+                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-2xl mx-auto">
+                    <div class="space-y-2">
+                        <span class="bg-emerald-500/10 text-accentGreen text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20">Tantangan Harian</span>
+                        <h3 class="text-2xl font-extrabold">Tebak Level Monster Liar!</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">
+                            Monster misterius muncul di hutan! Tebak angka levelnya antara <strong class="text-accentGreen">1 sampai 100</strong>. Kamu memiliki <strong id="chanceCount" class="text-accentBlue">7</strong> kesempatan nyawa!
+                        </p>
+                    </div>
+
+                    <div id="gameStatus" class="p-4 rounded-xl bg-slate-100 dark:bg-darkBg text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        Ketik tebakan level monster di bawah untuk memulai pertempuran!
+                    </div>
+
+                    <div class="flex gap-3 justify-center">
+                        <input type="number" id="guessInput" min="1" max="100" placeholder="Angka 1 - 100" class="w-40 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-center text-sm font-bold focus:outline-none focus:border-accentGreen">
+                        <button onclick="checkGuess()" id="guessBtn" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-6 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
+                            Serang! <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
+                        </button>
+                    </div>
+
+                    <button onclick="resetGame()" id="resetBtn" class="hidden text-xs text-accentBlue hover:underline font-semibold cursor-pointer">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Mainkan Ulang Lawan Monster Baru
+                    </button>
+                </div>
+            </section>
+
+            <!-- FITUR MINI GAME 2: RPG Photo Puzzle (TERINTEGRASI DI HALAMAN UTAMA) -->
+            <section id="puzzle-section" class="space-y-6">
+                <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-accentGreen"></i> Mini Game: RPG Photo Puzzle
+                </h2>
+                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-2xl mx-auto">
+                    <div class="space-y-2">
+                        <span class="bg-amber-500/10 text-amber-500 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/20">Quest Spesial</span>
+                        <h3 class="text-2xl font-extrabold">Susun Puzzle Foto Irfan!</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">
+                            Susun kembali potongan foto Irfan dengan mengklik kotaknya secara berurutan!
+                        </p>
+                    </div>
+
+                    <div id="puzzle-container"></div>
+                    
+                    <div class="flex justify-center">
+                        <button onclick="acakPuzzle()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
+                            <i class="fa-solid fa-shuffle mr-1"></i> Acak Puzzle
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quest Log (To-Do List Harian) -->
+            <section id="todo-section" class="space-y-6">
+                <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-accentGreen"></i> Quest Log Harian (Catatan Petualangan)
+                </h2>
+                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="todoInput" placeholder="Tambah quest atau tugas baru..." class="flex-1 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentGreen">
+                        <button onclick="addTodo()" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-5 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
+                            <i class="fa-solid fa-plus mr-1"></i> Tambah
+                        </button>
+                    </div>
+                    <ul id="todoList" class="space-y-2">
+                        <li class="flex items-center justify-between p-3 bg-slate-50 dark:bg-darkBg/60 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm">
+                            <span class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                                <i class="fa-solid fa-circle-dot text-accentGreen text-xs"></i> Menyelesaikan Portofolio RPG Web
+                            </span>
+                            <span class="text-xs text-emerald-600 dark:text-accentGreen font-semibold bg-emerald-500/10 px-2 py-1 rounded">Selesai</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Formulir Kontak ("Kirim Surat ke Guild") -->
+            <section id="contact" class="space-y-6">
+                <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-accentBlue"></i> Kirim Surat ke Guild (Kontak)
+                </h2>
+                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Nama Petualang / Pengirim</label>
+                            <input type="text" id="senderName" placeholder="Nama kamu" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Email / Kontak</label>
+                            <input type="email" id="senderEmail" placeholder="email@domain.com" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Pesan / Tawaran Quest</label>
+                        <textarea id="senderMessage" rows="3" placeholder="Tulis pesan atau kolaborasi di sini..." class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue"></textarea>
+                    </div>
+                    <button onclick="sendGuildMessage()" class="w-full bg-accentBlue hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition shadow text-sm cursor-pointer">
+                        Kirim Surat <i class="fa-solid fa-envelope-open-text ml-1"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 dark:border-slate-800 mt-16 py-6 text-center text-xs text-slate-500">
+            <p>&copy; 2026 Irfan Ardiansyah. Built with code & passion.</p>
+        </footer>
+    </div>
 
     <!-- JavaScript Interaktif -->
     <script>
+        // Transisi Layar Selamat Datang -> Konten Utama
+        function enterWebsite() {
+            const welcome = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+
+            welcome.classList.add('is-leaving');
+            setTimeout(() => {
+                mainContent.classList.add('is-entering');
+            }, 180);
+        }
+
+        function openWelcomeScreen() {
+            const welcome = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+
+            mainContent.classList.remove('is-entering');
+            welcome.classList.remove('is-leaving');
+        }
+
         // Logika Tombol Tema (Dark/Light Mode)
         function toggleTheme() {
             const html = document.documentElement;
