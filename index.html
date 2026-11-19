@@ -104,7 +104,7 @@
 <body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300 overflow-x-hidden">
 
     <!-- LAYAR UCAPAN SELAMAT DATANG FULL LAYAR -->
-    <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060b16] text-white transition-all duration-700 ease-in-out overflow-hidden">
+    <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#060b16] text-white transition-all duration-700 ease-in-out overflow-y-auto overflow-x-hidden">
         
         <!-- Latar Belakang Grid & Gradasi RPG -->
         <div class="absolute inset-0 bg-gradient-to-br from-[#060b16] via-[#0b1528] to-[#060b16]"></div>
@@ -133,7 +133,7 @@
         <!-- Wadah Utama: Foto Proporsional di Kiri + Ucapan Selamat Datang di Kanan -->
         <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
             
-            <!-- FOTO KARAKTER (UKURAN PROPORSIONAL, TIDAK TER-ZOOM) -->
+            <!-- FOTO KARAKTER -->
             <div class="relative flex items-center justify-center shrink-0">
                 <!-- Lingkaran Sihir SVG di Belakang Foto -->
                 <svg class="absolute w-[310px] h-[310px] sm:w-[400px] sm:h-[400px] text-emerald-400/35 animate-spin-slow pointer-events-none" viewBox="0 0 200 200" fill="none">
@@ -200,8 +200,28 @@
                     </div>
                 </div>
 
+                <!-- Info IG & Email di Tampilan Depan -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs sm:text-sm">
+                    <a
+                        href="https://instagram.com/fann_03"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 bg-slate-900/85 hover:bg-slate-800 border border-pink-400/35 text-pink-300 px-3.5 py-2 rounded-xl backdrop-blur-md transition"
+                    >
+                        <i class="fa-brands fa-instagram text-pink-400"></i>
+                        <span>IG: <strong>fann_03</strong></span>
+                    </a>
+                    <a
+                        href="mailto:irfannardiansyah188@gmail.com"
+                        class="inline-flex items-center gap-2 bg-slate-900/85 hover:bg-slate-800 border border-blue-400/35 text-blue-300 px-3.5 py-2 rounded-xl backdrop-blur-md transition break-all"
+                    >
+                        <i class="fa-solid fa-envelope text-blue-400"></i>
+                        <span>Email: <strong>irfannardiansyah188@gmail.com</strong></span>
+                    </a>
+                </div>
+
                 <!-- Tombol Masuk -->
-                <div class="pt-2 flex justify-center md:justify-start">
+                <div class="pt-1 flex justify-center md:justify-start">
                     <button
                         onclick="enterWebsite()"
                         class="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.55)] hover:shadow-[0_0_45px_rgba(16,185,129,0.8)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
