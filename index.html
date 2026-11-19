@@ -97,19 +97,19 @@
                 filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.35));
             }
             68% {
-                transform: scale(0.93);
-                filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.85));
+                transform: scale(0.92);
+                filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.9));
             }
             100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.5));
+                filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.55));
             }
         }
-        .animate-sword-strike {
-            animation: swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        .animate-shield-impact {
+        .rpg-logo-badge {
             animation: shieldImpact 0.95s ease-out forwards;
+        }
+        .rpg-sword {
+            animation: swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .animate-float-slow {
@@ -179,9 +179,9 @@
 
         <!-- LOGO KIRI ATAS TAMPILAN DEPAN -->
         <div class="fixed top-7 left-7 z-20">
-            <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center gap-3 select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
-                <div class="rpg-logo-badge relative w-11 h-11 shrink-0 flex items-center justify-center animate-shield-impact">
-                    <svg class="w-11 h-11" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+                <div class="rpg-logo-badge relative w-14 h-14 shrink-0 flex items-center justify-center">
+                    <svg class="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="rpgShieldGradWelcome" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
                                 <stop offset="0%" stop-color="#34d399"/>
@@ -191,28 +191,20 @@
                         </defs>
                         <path d="M32 5L53 13.5V29.5C53 43.2 44.1 54.4 32 59C19.9 54.4 11 43.2 11 29.5V13.5L32 5Z" fill="#071224" stroke="url(#rpgShieldGradWelcome)" stroke-width="3"/>
                         <path d="M32 11L47 17.2V29.1C47 39.8 40.3 48.6 32 52.5C23.7 48.6 17 39.8 17 29.1V17.2L32 11Z" stroke="url(#rpgShieldGradWelcome)" stroke-opacity="0.35" stroke-width="1.5"/>
-                        <text x="32" y="38" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="800" font-family="sans-serif">I</text>
+                        <text x="32" y="38" text-anchor="middle" fill="#34d399" font-size="11.5" font-weight="900" font-family="sans-serif" letter-spacing="0.4">Fann</text>
                     </svg>
-                    <svg class="rpg-sword absolute inset-0 w-11 h-11 animate-sword-strike pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="rpg-sword absolute inset-0 w-14 h-14 pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M46 14L23 37L27 41L50 18L52 12L46 14Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.2"/>
                         <path d="M19 33L31 45" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round"/>
                         <path d="M23 39L16 46" stroke="#10b981" stroke-width="3.4" stroke-linecap="round"/>
                         <circle cx="31" cy="33" r="2.2" fill="#38bdf8"/>
                     </svg>
                 </div>
-                <div class="leading-tight text-left">
-                    <div class="text-base sm:text-lg font-extrabold tracking-wide text-white">
-                        IRFAN<span class="text-emerald-400">.DEV</span>
-                    </div>
-                    <div class="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-300/85">
-                        RPG Realm
-                    </div>
-                </div>
             </button>
         </div>
 
         <!-- Wadah Utama: Foto Profil di Kiri + Ucapan di Tengah + Foto Puzzle di Kanan -->
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 pb-8 lg:pt-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-8 lg:pt-8 flex flex-col lg:flex-row items-center justify-between gap-8">
             
             <!-- KIRI: FOTO PROFIL -->
             <div class="relative flex flex-col items-center justify-center shrink-0">
@@ -355,9 +347,9 @@
             <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
                 <!-- LOGO KIRI ATAS DI DALAM WEBSITE -->
                 <div class="flex items-center gap-3">
-                    <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center gap-3 select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
-                        <div class="rpg-logo-badge relative w-11 h-11 shrink-0 flex items-center justify-center animate-shield-impact">
-                            <svg class="w-11 h-11" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button type="button" onclick="replaySwordAnim(this)" class="inline-flex items-center select-none group text-left cursor-pointer" title="Klik untuk memutar ulang animasi pedang">
+                        <div class="rpg-logo-badge relative w-14 h-14 shrink-0 flex items-center justify-center">
+                            <svg class="w-14 h-14" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient id="rpgShieldGradMain" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
                                         <stop offset="0%" stop-color="#34d399"/>
@@ -367,22 +359,14 @@
                                 </defs>
                                 <path d="M32 5L53 13.5V29.5C53 43.2 44.1 54.4 32 59C19.9 54.4 11 43.2 11 29.5V13.5L32 5Z" fill="#071224" stroke="url(#rpgShieldGradMain)" stroke-width="3"/>
                                 <path d="M32 11L47 17.2V29.1C47 39.8 40.3 48.6 32 52.5C23.7 48.6 17 39.8 17 29.1V17.2L32 11Z" stroke="url(#rpgShieldGradMain)" stroke-opacity="0.35" stroke-width="1.5"/>
-                                <text x="32" y="38" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="800" font-family="sans-serif">I</text>
+                                <text x="32" y="38" text-anchor="middle" fill="#34d399" font-size="11.5" font-weight="900" font-family="sans-serif" letter-spacing="0.4">Fann</text>
                             </svg>
-                            <svg class="rpg-sword absolute inset-0 w-11 h-11 animate-sword-strike pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="rpg-sword absolute inset-0 w-14 h-14 pointer-events-none" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M46 14L23 37L27 41L50 18L52 12L46 14Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.2"/>
                                 <path d="M19 33L31 45" stroke="#fbbf24" stroke-width="3.2" stroke-linecap="round"/>
                                 <path d="M23 39L16 46" stroke="#10b981" stroke-width="3.4" stroke-linecap="round"/>
                                 <circle cx="31" cy="33" r="2.2" fill="#38bdf8"/>
                             </svg>
-                        </div>
-                        <div class="leading-tight text-left">
-                            <div class="text-base sm:text-lg font-extrabold tracking-wide text-slate-900 dark:text-white">
-                                IRFAN<span class="text-emerald-500 dark:text-emerald-400">.DEV</span>
-                            </div>
-                            <div class="text-[10px] font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-300/85">
-                                RPG Realm
-                            </div>
                         </div>
                     </button>
                     <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-2.5 py-1 rounded-lg shadow">LVL. 20</span>
@@ -667,14 +651,14 @@
             const sword = btnEl.querySelector('.rpg-sword');
             const badge = btnEl.querySelector('.rpg-logo-badge');
             if (sword) {
-                sword.classList.remove('animate-sword-strike');
+                sword.style.animation = 'none';
                 void sword.offsetWidth;
-                sword.classList.add('animate-sword-strike');
+                sword.style.animation = 'swordStrike 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards';
             }
             if (badge) {
-                badge.classList.remove('animate-shield-impact');
+                badge.style.animation = 'none';
                 void badge.offsetWidth;
-                badge.classList.add('animate-shield-impact');
+                badge.style.animation = 'shieldImpact 0.95s ease-out forwards';
             }
         }
 
