@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPG Photo Puzzle - Irfan</title>
+    <title>Irfan Ardiansyah - Ultimate RPG Portfolio & Mini Game</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b',
+                        accentGreen: '#10b981',
+                        accentBlue: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a2e;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #f39c12;
-            text-shadow: 2px 2px #000;
-        }
+        /* Gaya Khusus Puzzle */
         #puzzle-container {
             display: grid;
             grid-template-columns: repeat(3, 100px);
@@ -40,64 +48,367 @@
         .puzzle-piece:active {
             transform: scale(0.95);
         }
-        .info {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #ddd;
-        }
-        .btn-group {
-            margin-top: 15px;
-        }
-        button, .back-link {
-            background-color: #e67e22;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px #d35400;
-        }
-        button:hover, .back-link:hover {
-            background-color: #d35400;
-        }
-        button:active, .back-link:active {
-            box-shadow: 0 2px #d35400;
-            transform: translateY(2px);
-        }
-        .back-link {
-            background-color: #34495e;
-            box-shadow: 0 4px #2c3e50;
-        }
-        .back-link:hover {
-            background-color: #2c3e50;
-        }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-300">
 
-    <h1>RPG Photo Puzzle Quest</h1>
-    <p class="info">Susun kembali potongan foto Irfan dengan mengklik kotaknya!</p>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+        <!-- Header / Navbar -->
+        <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-accentGreen text-darkBg text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-lg">LVL. 20</span>
+                <h1 class="text-xl font-bold tracking-tight">IRFAN.DEV</h1>
+            </div>
+            <nav class="flex items-center gap-6 text-sm font-medium">
+                <a href="#profil" class="hover:text-accentGreen transition hidden sm:inline">Profil</a>
+                <a href="#quests" class="hover:text-accentGreen transition hidden sm:inline">Quest</a>
+                <a href="#puzzle-section" class="hover:text-accentGreen transition hidden sm:inline text-accentGreen font-bold">Mini Game</a>
+                <!-- Tombol Toggle Tema -->
+                <button onclick="toggleTheme()" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-yellow-400 p-2 rounded-xl transition shadow hover:scale-105" title="Ganti Tema">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+            </nav>
+        </header>
 
-    <div id="puzzle-container"></div>
-    
-    <div class="btn-group">
-        <button onclick="acakPuzzle()">Acak Puzzle</button>
-        <a href="index.html" class="back-link">Kembali ke Portofolio</a>
-    </div>
+        <!-- HERO SECTION: FOTO FULL MENYATU DENGAN SKILL KARAKTER -->
+        <section id="profil" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700/80 rounded-2xl shadow-xl relative overflow-hidden transition-colors flex flex-col md:flex-row min-h-[460px]">
+            
+            <!-- Sisi Kiri: Foto Full Menyatu -->
+            <div class="relative w-full md:w-[44%] h-[340px] sm:h-[380px] md:h-auto shrink-0 overflow-hidden bg-slate-900">
+                <img 
+                    src="foto-profil.jpg" 
+                    alt="Foto Profil Irfan Ardiansyah" 
+                    class="w-full h-full object-cover object-top"
+                />
+                <!-- Gradasi menyatu ke kanan (Desktop) -->
+                <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-cardBg/35 to-cardBg pointer-events-none"></div>
+                <!-- Gradasi menyatu ke bawah (Mobile) -->
+                <div class="block md:hidden absolute inset-0 bg-gradient-to-b from-transparent via-white/30 dark:via-cardBg/45 to-white dark:to-cardBg pointer-events-none"></div>
+                <!-- Aksen cahaya -->
+                <div class="absolute -bottom-10 -left-10 w-52 h-52 bg-accentGreen/15 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
 
+            <!-- Sisi Kanan: Identitas & Statistik Skill Menyatu -->
+            <div class="relative z-10 w-full md:w-[56%] p-6 md:p-8 md:-ml-6 flex flex-col justify-between space-y-6">
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-accentBlue border border-blue-500/20">
+                            Mahasiswa Sistem Informasi
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-accentGreen border border-emerald-500/20">
+                            <i class="fa-solid fa-shield-halved text-[11px]"></i> Ready for Quest
+                        </span>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Irfan Ardiansyah</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        Berfokus mengeksplorasi pengembangan sistem web, logika pemrograman, dan merancang solusi digital yang interaktif serta fungsional.
+                    </p>
+                </div>
+
+                <!-- Statistik Skill Karakter Menyatu di Samping Foto -->
+                <div id="skills" class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-bar text-accentBlue"></i> Statistik Skill Karakter
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>HTML / CSS / Tailwind</span>
+                                <span class="text-accentGreen">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-accentGreen h-full rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>JavaScript Logic & DOM</span>
+                                <span class="text-accentBlue">75%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-accentBlue h-full rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Database & Sistem Informasi</span>
+                                <span class="text-amber-500 dark:text-amber-400">70%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-amber-500 dark:bg-amber-400 h-full rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Problem Solving & Algoritma</span>
+                                <span class="text-purple-500 dark:text-purple-400">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 dark:bg-purple-400 h-full rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lokasi -->
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-location-dot text-rose-500"></i> Jambi, Indonesia
+                    </span>
+                    <span class="font-medium text-slate-600 dark:text-slate-300">
+                        <i class="fa-solid fa-code text-accentGreen mr-1"></i> RPG Character Sheet
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daftar Quest (Proyek Selesai) -->
+        <section id="quests" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-scroll text-accentBlue"></i> Daftar Quest (Proyek Selesai)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Quest 1: Split Bill -->
+                <a href="split-bill.html" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between hover:border-accentGreen transition group block shadow-lg">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-accentGreen px-2.5 py-1 rounded border border-emerald-500/20">Web App</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400"><i class="fa-solid fa-star text-amber-400 mr-1"></i> Featured</span>
+                        </div>
+                        <h3 class="text-lg font-bold group-hover:text-accentGreen transition">Split Bill & Kalkulator Patungan</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">
+                            Aplikasi web interaktif untuk menghitung patungan makan bareng atau belanja secara adil, dilengkapi kalkulasi pajak.
+                        </p>
+                    </div>
+                    <div class="pt-6 flex items-center justify-between">
+                        <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
+                            <span>HTML</span> • <span>Tailwind</span> • <span>JS</span>
+                        </div>
+                        <span class="text-xs font-semibold text-accentGreen flex items-center gap-1 group-hover:translate-x-1 transition">
+                            Mainkan Quest <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Quest 2: Mini E-Commerce -->
+                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col justify-between opacity-75 shadow-lg">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-blue-500/10 text-accentBlue px-2.5 py-1 rounded border border-blue-500/20">Coming Soon</span>
+                        </div>
+                        <h3 class="text-lg font-bold">Mini E-Commerce Kampus</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">
+                            Proyek sistem pemesanan online skala kecil untuk lingkungan pertemanan dan kampus.
+                        </p>
+                    </div>
+                    <div class="pt-6 flex items-center justify-between">
+                        <div class="flex gap-2 text-xs text-slate-500 dark:text-slate-400">
+                            <span>PHP</span> • <span>MySQL</span>
+                        </div>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">Locked <i class="fa-solid fa-lock text-xs ml-1"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FITUR MINI GAME 1: Tebak Level Monster -->
+        <section id="minigame" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-gamepad text-accentGreen"></i> Mini Game: Tebak Level Monster (Boss Raid)
+            </h2>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-xl mx-auto">
+                <div class="space-y-2">
+                    <span class="bg-emerald-500/10 text-accentGreen text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20">Tantangan Harian</span>
+                    <h3 class="text-2xl font-extrabold">Tebak Level Monster Liar!</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">
+                        Monster misterius muncul di hutan! Tebak angka levelnya antara <strong class="text-accentGreen">1 sampai 100</strong>. Kamu memiliki <strong id="chanceCount" class="text-accentBlue">7</strong> kesempatan nyawa!
+                    </p>
+                </div>
+
+                <div id="gameStatus" class="p-4 rounded-xl bg-slate-100 dark:bg-darkBg text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    Ketik tebakan level monster di bawah untuk memulai pertempuran!
+                </div>
+
+                <div class="flex gap-3 justify-center">
+                    <input type="number" id="guessInput" min="1" max="100" placeholder="Angka 1 - 100" class="w-40 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-center text-sm font-bold focus:outline-none focus:border-accentGreen">
+                    <button onclick="checkGuess()" id="guessBtn" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-6 py-2.5 rounded-xl transition text-sm shadow">
+                        Serang! <i class="fa-solid fa-wand-magic-sparkles ml-1"></i>
+                    </button>
+                </div>
+
+                <button onclick="resetGame()" id="resetBtn" class="hidden text-xs text-accentBlue hover:underline font-semibold">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Mainkan Ulang Lawan Monster Baru
+                </button>
+            </div>
+        </section>
+
+        <!-- FITUR MINI GAME 2: RPG Photo Puzzle (TERINTEGRASI DI HALAMAN UTAMA) -->
+        <section id="puzzle-section" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-puzzle-piece text-accentGreen"></i> Mini Game: RPG Photo Puzzle
+            </h2>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 md:p-8 shadow-xl space-y-6 text-center max-w-xl mx-auto">
+                <div class="space-y-2">
+                    <span class="bg-amber-500/10 text-amber-500 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/20">Quest Spesial</span>
+                    <h3 class="text-2xl font-extrabold">Susun Puzzle Foto Irfan!</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">
+                        Susun kembali potongan foto Irfan dengan mengklik kotaknya secara berurutan!
+                    </p>
+                </div>
+
+                <div id="puzzle-container"></div>
+                
+                <div class="flex justify-center">
+                    <button onclick="acakPuzzle()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm shadow cursor-pointer">
+                        <i class="fa-solid fa-shuffle mr-1"></i> Acak Puzzle
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quest Log (To-Do List Harian) -->
+        <section id="todo-section" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentGreen pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-accentGreen"></i> Quest Log Harian (Catatan Petualangan)
+            </h2>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="flex gap-2">
+                    <input type="text" id="todoInput" placeholder="Tambah quest atau tugas baru..." class="flex-1 bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentGreen">
+                    <button onclick="addTodo()" class="bg-accentGreen hover:bg-emerald-600 text-darkBg font-bold px-5 py-2.5 rounded-xl transition text-sm shadow">
+                        <i class="fa-solid fa-plus mr-1"></i> Tambah
+                    </button>
+                </div>
+                <ul id="todoList" class="space-y-2">
+                    <li class="flex items-center justify-between p-3 bg-slate-50 dark:bg-darkBg/60 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm">
+                        <span class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                            <i class="fa-solid fa-circle-dot text-accentGreen text-xs"></i> Menyelesaikan Portofolio RPG Web
+                        </span>
+                        <span class="text-xs text-emerald-600 dark:text-accentGreen font-semibold bg-emerald-500/10 px-2 py-1 rounded">Selesai</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formulir Kontak ("Kirim Surat ke Guild") -->
+        <section id="contact" class="space-y-6">
+            <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-accentBlue"></i> Kirim Surat ke Guild (Kontak)
+            </h2>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Nama Petualang / Pengirim</label>
+                        <input type="text" id="senderName" placeholder="Nama kamu" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Email / Kontak</label>
+                        <input type="email" id="senderEmail" placeholder="email@domain.com" class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase mb-1 text-slate-600 dark:text-slate-400">Pesan / Tawaran Quest</label>
+                    <textarea id="senderMessage" rows="3" placeholder="Tulis pesan atau kolaborasi di sini..." class="w-full bg-slate-50 dark:bg-darkBg border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-accentBlue"></textarea>
+                </div>
+                <button onclick="sendGuildMessage()" class="w-full bg-accentBlue hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition shadow text-sm">
+                    Kirim Surat <i class="fa-solid fa-envelope-open-text ml-1"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 mt-16 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Irfan Ardiansyah. Built with code & passion.</p>
+    </footer>
+
+    <!-- JavaScript Interaktif -->
     <script>
-        const container = document.getElementById('puzzle-container');
+        // Logika Tombol Tema (Dark/Light Mode)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                html.classList.add('dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // Variabel & Logika Mini Game (Tebak Level Monster)
+        let monsterLevel = Math.floor(Math.random() * 100) + 1;
+        let chances = 7;
+
+        function checkGuess() {
+            const input = document.getElementById('guessInput');
+            const status = document.getElementById('gameStatus');
+            const chanceCount = document.getElementById('chanceCount');
+            const guessBtn = document.getElementById('guessBtn');
+            const resetBtn = document.getElementById('resetBtn');
+
+            const userGuess = parseInt(input.value);
+
+            if (!userGuess || userGuess < 1 || userGuess > 100) {
+                status.innerText = "⚠️ Masukkan angka level antara 1 sampai 100!";
+                status.className = "p-4 rounded-xl bg-amber-500/10 text-amber-500 text-sm font-medium border border-amber-500/20";
+                return;
+            }
+
+            chances--;
+            chanceCount.innerText = chances;
+
+            if (userGuess === monsterLevel) {
+                status.innerHTML = `🎉 <strong>SELAMAT!</strong> Kamu berhasil mengalahkan monster di Level ${monsterLevel}! Quest Selesai!`;
+                status.className = "p-4 rounded-xl bg-emerald-500/10 text-emerald-500 text-sm font-bold border border-emerald-500/20";
+                endGame();
+            } else if (chances === 0) {
+                status.innerHTML = `💥 <strong>GAME OVER!</strong> Nyawamu habis. Level monster yang benar adalah <strong class="text-rose-500">${monsterLevel}</strong>.`;
+                status.className = "p-4 rounded-xl bg-rose-500/10 text-rose-500 text-sm font-bold border border-rose-500/20";
+                endGame();
+            } else if (userGuess < monsterLevel) {
+                status.innerHTML = `📈 Level monster <strong>LEBIH TINGGI</strong> dari ${userGuess}! Sisa nyawa: ${chances}`;
+                status.className = "p-4 rounded-xl bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20";
+            } else {
+                status.innerHTML = `📉 Level monster <strong>LEBIH RENDAH</strong> dari ${userGuess}! Sisa nyawa: ${chances}`;
+                status.className = "p-4 rounded-xl bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20";
+            }
+            input.value = '';
+        }
+
+        function endGame() {
+            document.getElementById('guessInput').disabled = true;
+            document.getElementById('guessBtn').disabled = true;
+            document.getElementById('guessBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('resetBtn').classList.remove('hidden');
+        }
+
+        function resetGame() {
+            monsterLevel = Math.floor(Math.random() * 100) + 1;
+            chances = 7;
+            document.getElementById('chanceCount').innerText = chances;
+            document.getElementById('guessInput').disabled = false;
+            document.getElementById('guessBtn').disabled = false;
+            document.getElementById('guessBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+            document.getElementById('resetBtn').classList.add('hidden');
+            const status = document.getElementById('gameStatus');
+            status.innerText = "⚔️ Pertempuran baru dimulai! Tebak level monster baru dari 1 - 100.";
+            status.className = "p-4 rounded-xl bg-slate-100 dark:bg-darkBg text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700";
+        }
+
+        // Logika Mini Game 2: RPG Photo Puzzle
+        const puzzleContainer = document.getElementById('puzzle-container');
         const ukuranGrid = 3;
         let posisiAwal = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         let posisiSekarang = [...posisiAwal];
 
         function buatPuzzle() {
-            container.innerHTML = '';
+            puzzleContainer.innerHTML = '';
             posisiSekarang.forEach((indexAsli, indexSekarang) => {
                 const piece = document.createElement('div');
                 piece.classList.add('puzzle-piece');
@@ -110,7 +421,7 @@
                     tukarPosisi(indexSekarang);
                 });
 
-                container.appendChild(piece);
+                puzzleContainer.appendChild(piece);
             });
         }
 
@@ -118,7 +429,7 @@
         function tukarPosisi(index) {
             if (indeksTerpilih === null) {
                 indeksTerpilih = index;
-                container.children[index].style.border = '2px solid #00ffcc';
+                puzzleContainer.children[index].style.border = '2px solid #00ffcc';
             } else {
                 let temp = posisiSekarang[indeksTerpilih];
                 posisiSekarang[indeksTerpilih] = posisiSekarang[index];
@@ -126,7 +437,7 @@
                 
                 indeksTerpilih = null;
                 buatPuzzle();
-                cekMenang();
+                cekMenangPuzzle();
             }
         }
 
@@ -138,7 +449,7 @@
             buatPuzzle();
         }
 
-        function cekMenang() {
+        function cekMenangPuzzle() {
             const menang = posisiSekarang.every((val, i) => val === posisiAwal[i]);
             if (menang) {
                 setTimeout(() => {
@@ -147,8 +458,48 @@
             }
         }
 
+        // Jalankan puzzle saat halaman dimuat
         acakPuzzle();
-    </script>
 
+        // Logika Quest Log (To-Do List)
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            if (!text) {
+                alert("Masukkan nama quest terlebih dahulu!");
+                return;
+            }
+
+            const list = document.getElementById('todoList');
+            const li = document.createElement('li');
+            li.className = "flex items-center justify-between p-3 bg-slate-50 dark:bg-darkBg/60 border border-slate-200 dark:border-slate-700/50 rounded-xl text-sm transition";
+            li.innerHTML = `
+                <span class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                    <input type="checkbox" onclick="this.nextElementSibling.classList.toggle('line-through'); this.nextElementSibling.classList.toggle('opacity-50')" class="accent-emerald-500 w-4 h-4 rounded cursor-pointer">
+                    <span>${text}</span>
+                </span>
+                <button onclick="this.parentElement.remove()" class="text-rose-500 hover:text-rose-400 text-xs font-semibold px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+            `;
+            list.appendChild(li);
+            input.value = '';
+        }
+
+        // Logika Kirim Pesan Kontak
+        function sendGuildMessage() {
+            const name = document.getElementById('senderName').value.trim();
+            const email = document.getElementById('senderEmail').value.trim();
+            const message = document.getElementById('senderMessage').value.trim();
+
+            if (!name || !email || !message) {
+                alert("Mohon lengkapi semua kolom surat terlebih dahulu, Petualang!");
+                return;
+            }
+
+            alert(`Terima kasih, ${name}! Suratmu berhasil dikirim ke Guild Irfan Ardiansyah.`);
+            document.getElementById('senderName').value = '';
+            document.getElementById('senderEmail').value = '';
+            document.getElementById('senderMessage').value = '';
+        }
+    </script>
 </body>
 </html>
