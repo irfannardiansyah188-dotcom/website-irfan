@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
@@ -70,68 +70,99 @@
             </nav>
         </header>
 
-        <!-- Profil Karakter -->
-        <section id="profil" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700/80 rounded-2xl p-6 md:p-8 shadow-xl relative overflow-hidden transition-colors">
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-accentGreen/5 rounded-full blur-2xl"></div>
-            <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
-                <div class="w-28 h-28 rounded-2xl border-2 border-accentBlue flex items-center justify-center bg-slate-100 dark:bg-darkBg shadow-inner relative">
-                    <i class="fa-solid fa-user-ninja text-4xl text-accentGreen"></i>
-                </div>
-                <div class="space-y-2">
-                    <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-accentBlue border border-blue-500/20">Mahasiswa Sistem Informasi</span>
-                    <h2 class="text-3xl font-extrabold tracking-tight">Irfan Ardiansyah</h2>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl">
+        <!-- HERO SECTION: FOTO FULL MENYATU DENGAN SKILL KARAKTER -->
+        <section id="profil" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700/80 rounded-2xl shadow-xl relative overflow-hidden transition-colors flex flex-col md:flex-row min-h-[460px]">
+            
+            <!-- Sisi Kiri: Foto Full Menyatu -->
+            <div class="relative w-full md:w-[44%] h-[340px] sm:h-[380px] md:h-auto shrink-0 overflow-hidden bg-slate-900">
+                <img 
+                    src="foto-profil.png" 
+                    alt="Foto Profil Irfan Ardiansyah" 
+                    class="w-full h-full object-cover object-top"
+                />
+                <!-- Gradasi menyatu ke kanan (Desktop) -->
+                <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-cardBg/35 to-cardBg pointer-events-none"></div>
+                <!-- Gradasi menyatu ke bawah (Mobile) -->
+                <div class="block md:hidden absolute inset-0 bg-gradient-to-b from-transparent via-white/30 dark:via-cardBg/45 to-white dark:to-cardBg pointer-events-none"></div>
+                <!-- Aksen cahaya -->
+                <div class="absolute -bottom-10 -left-10 w-52 h-52 bg-accentGreen/15 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+            <!-- Sisi Kanan: Identitas & Statistik Skill Menyatu -->
+            <div class="relative z-10 w-full md:w-[56%] p-6 md:p-8 md:-ml-6 flex flex-col justify-between space-y-6">
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-accentBlue border border-blue-500/20">
+                            Mahasiswa Sistem Informasi
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-accentGreen border border-emerald-500/20">
+                            <i class="fa-solid fa-shield-halved text-[11px]"></i> Ready for Quest
+                        </span>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Irfan Ardiansyah</h2>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                         Berfokus mengeksplorasi pengembangan sistem web, logika pemrograman, dan merancang solusi digital yang interaktif serta fungsional.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-2 text-xs text-slate-500 dark:text-slate-400">
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-rose-500"></i> Jambi, Indonesia</span>
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-accentGreen"></i> Status: Ready for Quest</span>
-                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Statistik Skill Karakter -->
-        <section id="skills" class="space-y-6">
-            <h2 class="text-xl font-bold border-l-4 border-accentBlue pl-3 flex items-center gap-2">
-                <i class="fa-solid fa-chart-bar text-accentBlue"></i> Statistik Skill Karakter
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 p-5 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex justify-between text-sm font-semibold">
-                        <span>HTML / CSS / Tailwind</span>
-                        <span class="text-accentGreen">85%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 dark:bg-darkBg h-2.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
-                        <div class="bg-accentGreen h-full rounded-full" style="width: 85%"></div>
+                <!-- Statistik Skill Karakter Menyatu di Samping Foto -->
+                <div id="skills" class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-bar text-accentBlue"></i> Statistik Skill Karakter
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>HTML / CSS / Tailwind</span>
+                                <span class="text-accentGreen">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-accentGreen h-full rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>JavaScript Logic & DOM</span>
+                                <span class="text-accentBlue">75%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-accentBlue h-full rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Database & Sistem Informasi</span>
+                                <span class="text-amber-500 dark:text-amber-400">70%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-amber-500 dark:bg-amber-400 h-full rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50/90 dark:bg-darkBg/75 backdrop-blur-sm border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-xl space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Problem Solving & Algoritma</span>
+                                <span class="text-purple-500 dark:text-purple-400">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 dark:bg-purple-400 h-full rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 p-5 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex justify-between text-sm font-semibold">
-                        <span>JavaScript Logic & DOM</span>
-                        <span class="text-accentBlue">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 dark:bg-darkBg h-2.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
-                        <div class="bg-accentBlue h-full rounded-full" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 p-5 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex justify-between text-sm font-semibold">
-                        <span>Database & Sistem Informasi</span>
-                        <span class="text-amber-500 dark:text-amber-400">70%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 dark:bg-darkBg h-2.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
-                        <div class="bg-amber-500 dark:bg-amber-400 h-full rounded-full" style="width: 70%"></div>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-700 p-5 rounded-xl space-y-2 shadow-sm">
-                    <div class="flex justify-between text-sm font-semibold">
-                        <span>Problem Solving & Algoritma</span>
-                        <span class="text-purple-500 dark:text-purple-400">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 dark:bg-darkBg h-2.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
-                        <div class="bg-purple-500 dark:bg-purple-400 h-full rounded-full" style="width: 80%"></div>
-                    </div>
+
+                <!-- Lokasi -->
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-700/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-location-dot text-rose-500"></i> Jambi, Indonesia
+                    </span>
+                    <span class="font-medium text-slate-600 dark:text-slate-300">
+                        <i class="fa-solid fa-code text-accentGreen mr-1"></i> RPG Character Sheet
+                    </span>
                 </div>
             </div>
         </section>
